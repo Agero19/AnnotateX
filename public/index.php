@@ -1,30 +1,27 @@
 <?php
-// Define performance start time (if needed elsewhere)
-use routes\Route;
+// public/index.php
 
-define('APP_START', microtime(true));
+// Для разработки включаем вывод ошибок
+use Core\Router;
 
-// Register the Composer autoloader (check if it exists)
-$composerAutoloader = __DIR__.'/../vendor/autoload.php';
-if (!file_exists($composerAutoloader)) {
-    die('Error: Composer autoloader not found. Run "composer install".');
-}
-require $composerAutoloader;
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// Require route files (ensure they exist)
-$routeFile = __DIR__.'/../routes/Route.php';
-$webFile = __DIR__.'/../routes/web.php';
+// Подключаем автозагрузчик Composer (если используется)
+require_once __DIR__ . '/../vendor/autoload.php';
 
-if (!file_exists($routeFile) || !file_exists($webFile)) {
-    die('Error: Required route files are missing.');
-}
+// Загружаем конфигурацию
+$config = require_once __DIR__ . '/../config/app.php';
 
-require_once $routeFile;
-require_once $webFile;
+// Инициализируем роутер и передаём конфигурацию (на случай, если понадобится использовать настройки)
+$router = new Router($config);
 
-// Run the application routes (with exception handling)
-try {
-    Route::run();
-} catch (Exception $e) {
-    die('Error during route run: '.$e->getMessage());
-}
+// Регистрируем маршруты
+// Пример: для главной страницы вызывается метод index контроллера HomeController
+$router->get('/', 'HomeController@index');
+
+// Здесь можно добавить и другие маршруты, например:
+// $router->post('/login', 'AuthController@login');
+
+// Обрабатываем запрос: передаём текущий URI и HTTP-метод
+$router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
