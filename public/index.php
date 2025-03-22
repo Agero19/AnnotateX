@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Загрузка переменных окружения из файла .env
+//  .env
 
 $config = require_once __DIR__ . '/../config/app.php';
 
