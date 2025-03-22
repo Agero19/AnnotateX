@@ -7,24 +7,20 @@ namespace Core;
 class Router {
     // Хранит список зарегистрированных маршрутов
     protected $routes = [];
-    // Конфигурация приложения (если понадобится)
     protected $config = [];
 
     public function __construct(array $config = []) {
         $this->config = $config;
     }
 
-    // Регистрация маршрута для GET-запроса
     public function get($uri, $action) {
         $this->addRoute('GET', $uri, $action);
     }
 
-    // Регистрация маршрута для POST-запроса
     public function post($uri, $action) {
         $this->addRoute('POST', $uri, $action);
     }
 
-    // Добавление маршрута в список
     protected function addRoute($method, $uri, $action) {
         // Удаляем завершающий слэш для единообразия
 //        $uri = rtrim($uri, '/');
@@ -38,15 +34,12 @@ class Router {
         ];
     }
 
-    // Обработка (диспетчеризация) запроса
     public function dispatch($requestedUri, $requestedMethod) {
-        // Извлекаем путь из URL (без GET-параметров)
         $uri = parse_url($requestedUri, PHP_URL_PATH);
         $uri = rtrim($uri);
         if ($uri === '') {
             $uri = '/';
         }
-        // Поиск маршрута, соответствующего текущему URI и методу
         //TODO: Rewrite concatenation of index page path as a static or some other way
         foreach ($this->routes as $route) {
             if ($route['method'] === $requestedMethod && '/Annotatex/public/index.php'.$route['uri'] === $uri.'/') {
@@ -63,11 +56,9 @@ class Router {
         echo "404 Not Found";
     }
 
-    // Вызов действия контроллера
     protected function callAction($action) {
         // Ожидается формат "Controller@method"
         list($controllerName, $method) = explode('@', $action);
-        // Формируем полное имя класса контроллера, например \Controller\HomeController
         $controllerClass = "Controller\\" . $controllerName;
 
         if (!class_exists($controllerClass)) {

@@ -2,18 +2,20 @@
 
 // config/app.php
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 return [
-    // Базовый URL приложения (используется, например, для генерации ссылок)
     'base_url' => 'https://AnnotateX.com',
 
-    // Режим работы: development или production
     'app_env' => 'development',
 
     // Настройки подключения к базе данных
     'db' => [
-        'host' => 'localhost',
-        'database' => 'your_database',
-        'user' => 'your_user',
-        'password' => 'your_password',
+        'driver' => $_ENV['DB_TYPE'],
+        'host' => $_ENV['DB_HOST'],
+        'database' => $_ENV['DB_NAME'],
+        'user' => $_ENV['DB_USERNAME'],
+        'password' => $_ENV['DB_PWD'],
     ],
 ];

@@ -4,5 +4,10 @@
       "Core\\": "src/Core/",
       "Controller\\": "src/Controller/"
     }
+  },
+  "require": {
+    "php": ">=7.0",
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "^5.6"
   }
 }
