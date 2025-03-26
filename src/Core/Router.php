@@ -42,7 +42,7 @@ class Router {
         }
         //TODO: Rewrite concatenation of index page path as a static or some other way
         foreach ($this->routes as $route) {
-            if ($route['method'] === $requestedMethod && '/Annotatex/public/index.php'.$route['uri'] === $uri.'/') {
+            if ($route['method'] === $requestedMethod && $route['uri'] === $uri) {
                 try {
                     return $this->callAction($route['action']);
                 } catch (\Exception $e) {
