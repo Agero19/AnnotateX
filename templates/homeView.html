@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+  <meta charset="UTF-8">
+
+  <!-- Viewport -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+
+  <!-- Preloaded web font (Inter) -->
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- TODO: This should be changed to correct path -->
+  <link rel="stylesheet"
+    href="../public/css/reset.css">
+  <link rel="stylesheet"
+    href="../public/css/main.css">
+
+  <title>Home</title>
 </head>
+
 <body>
-<div>
-    Homepage
-</div>
+  <div class="main-container">
+
+    <header class="header">
+      <div class="container">
+
+        <a href="#"
+          class="logo">
+          <img src="../public/images/logo.svg"
+            alt="Logo">
+        </a>
+
+        <!-- Main nav -->
+        <nav class="nav">
+          <ul class="list-unstyled">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Search -->
+        <div class="search">
+          <input type="text"
+            placeholder="Search">
+          <button>Search</button>
+        </div>
+
+        <!-- User icon -->
+        <div class="user">
+          <img src="../public/images/user.svg"
+            alt="User">
+        </div>
+
+      </div>
+    </header>
+
+    <main class="pt-3 mt-3">
+      <div class="container">
+
+        <div class="filters">Filters</div>
+
+        <ul class="grid-container list-unstyled">
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+          <li class="grid-item"></li>
+        </ul>
+
+      </div>
+    </main>
+
+  </div>
+
+  <footer class="footer">Footer</footer>
 </body>
+
 </html>

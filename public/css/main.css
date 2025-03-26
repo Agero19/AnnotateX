@@ -1,0 +1,122 @@
+/* 1. Scaffolding */
+.list-unstyled {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  flex: 1; /* Pushes the footer down */
+}
+
+.mt-1 {
+  margin-top: 12px;
+}
+.mt-2 {
+  margin-top: 24px;
+}
+.mt-3 {
+  margin-top: 32px;
+}
+.pt-1 {
+  padding-top: 12px;
+}
+.pt-2 {
+  padding-top: 24px;
+}
+.pt-3 {
+  padding-top: 32px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+
+/* 2. Typography */
+
+body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+
+/* 3. Header */
+.header .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav ul{
+  display: flex;
+}
+
+
+/* 4. Grid */
+
+.grid-container {
+  display: grid;
+  gap: 1.5rem;
+
+  grid-template-columns: 1fr;
+}
+
+/* 2 columns on tablets */
+@media (min-width: 641px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 columns on medium screens */
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 columns on large screens */
+@media (min-width: 1280px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.grid-item {
+  width: 100%;
+  padding-bottom: 75%;
+  background: #ccc;
+}
+
+
+/* Footer */
+
+.footer {
+  background: #ccc;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
