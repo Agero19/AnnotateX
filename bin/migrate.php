@@ -1,63 +1,72 @@
-#!/usr/bin/env php
 <?php
-// bin/migrate.php
 
-// Подключаем автозагрузчик Composer
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../config/app.php';
 
-// Загружаем конфигурацию приложения
 $config = require __DIR__ . '/../config/app.php';
+$dbConfig = $config['db'];
 
-// Получаем PDO-соединение через наш Database-класс
-use Core\Database;
-$db = Database::getInstance($config['db'])->getConnection();
+try {
+    // Connect to MySQL
+    $pdo = new PDO("mysql:host={$dbConfig['host']}", $dbConfig['user'], $dbConfig['password']);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Массив SQL-запросов для создания таблиц
-$queries = [
-    // Таблица пользователей
-    "CREATE TABLE IF NOT EXISTS users (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         username VARCHAR(255) NOT NULL,
-         email VARCHAR(255) NOT NULL,
-         password_hash VARCHAR(255) NOT NULL,
-         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+    // Create database if not exists
+    $dbName = $dbConfig['database'];
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbName` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+    $pdo->exec("USE `$dbName`;");
 
-    // Таблица изображений
-    "CREATE TABLE IF NOT EXISTS images (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         user_id INT NOT NULL,
-         file_path VARCHAR(255) NOT NULL,
-         visibility ENUM('public', 'private') DEFAULT 'private',
-         title VARCHAR(255),
-         description TEXT,
-         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-         FOREIGN KEY (user_id) REFERENCES users(id)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+    // Create tables
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL UNIQUE,
+            email VARCHAR(100) NOT NULL UNIQUE,
+            password_hash VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        
+        CREATE TABLE IF NOT EXISTS images (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            file_path VARCHAR(255) NOT NULL,
+            visibility BOOLEAN DEFAULT FALSE,
+            title VARCHAR(255) NOT NULL,
+            description TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+        
+        CREATE TABLE IF NOT EXISTS annotations (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            image_id INT NOT NULL,
+            user_id INT NOT NULL,
+            x INT NOT NULL,
+            y INT NOT NULL,
+            width INT NOT NULL,
+            height INT NOT NULL,
+            comment TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+    ");
 
-    // Таблица аннотаций
-    "CREATE TABLE IF NOT EXISTS annotations (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         image_id INT NOT NULL,
-         user_id INT NOT NULL,
-         x FLOAT NOT NULL,
-         y FLOAT NOT NULL,
-         width FLOAT,
-         height FLOAT,
-         comment TEXT,
-         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-         FOREIGN KEY (image_id) REFERENCES images(id),
-         FOREIGN KEY (user_id) REFERENCES users(id)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-];
+    echo "✅ Database & Tables Created Successfully\n";
 
-foreach ($queries as $query) {
-    try {
-        $db->exec($query);
-        echo "Выполнено: " . $query . "\n";
-    } catch (PDOException $e) {
-        echo "Ошибка при выполнении запроса: " . $e->getMessage() . "\n";
-    }
+    // Insert test data
+    $pdo->exec("
+        INSERT INTO users (username, email, password_hash) VALUES 
+        ('testuser', 'test@example.com', '" . password_hash('password123', PASSWORD_DEFAULT) . "');
+
+        INSERT INTO images (user_id, file_path, visibility, title, description) VALUES 
+        (1, 'sample_image.jpg', TRUE, 'test_title', 'test_description');
+
+        INSERT INTO annotations (image_id, user_id, x, y, width, height, comment) VALUES 
+        (1, 1, 100, 100, 50, 50, 'Example Label');
+    ");
+
+    echo "✅ Test Data Inserted\n";
+} catch (PDOException $e) {
+    die("❌ Database Error: " . $e->getMessage() . "\n");
 }
-
-echo "Миграция базы данных завершена.\n";

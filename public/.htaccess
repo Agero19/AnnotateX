@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Allow access to existing static files (CSS, JS, images)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Redirect all other requests to index.html (for frontend routing)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]

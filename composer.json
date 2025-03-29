@@ -1,13 +1,14 @@
 {
   "autoload": {
     "psr-4": {
-      "Core\\": "src/Core/",
-      "Controller\\": "src/Controller/"
+      "Core\\": "api/Core/",
+      "Controllers\\": "api/Controllers/"
     }
   },
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.4",
     "ext-pdo": "*",
-    "vlucas/phpdotenv": "^5.6"
+    "vlucas/phpdotenv": "^5.6",
+    "ext-json": "*"
   }
 }
