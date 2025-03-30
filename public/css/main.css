@@ -83,12 +83,34 @@ body {
 
 .logo {
   display: block;
-  width: 160px;
+  width: 200px;
   height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
 }
 
-.nav ul{
+.nav ul {
   display: flex;
+}
+
+.nav ul li {
+  margin-right: 24px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.nav ul li a:hover {
+  border-color: #8b8a8a;
 }
 
 /* -- Search */
@@ -160,24 +182,31 @@ body {
   color: #555;
 }
 
-.user-btn:hover .user-icon {
-  color: #4CAF50;
-}
-
 .dropdown-content {
   position: absolute;
   right: 0;
-  top: 100%;
+  top: calc(100% + 10px);
   background-color: #fff;
   min-width: 160px;
   box-shadow: 0px 8px 22px -12px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 6px;
+  border: 1px solid #ebebeb;
 
   visibility: hidden;
   opacity: 0;
   transform: translateY(10px);
   transition: visibility 0s, opacity 0.3s, transform 0.3s;
+}
+
+.dropdown-content::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 0;
+  height: 20px;
+  width: 100%;
+  bottom: red;
 }
 
 .dropdown-content a {
@@ -228,9 +257,70 @@ body {
 }
 
 .grid-item {
+  
+}
+
+.grid-item:hover {
+}
+
+
+.grid-item .img-wrap {
+  display: block;
+  position: relative;
   width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
   padding-bottom: 75%;
-  background: #ccc;
+
+  border: 1px solid #ccc;
+}
+
+.grid-item .img-wrap .title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 0 0 6px 6px;
+  transform: translateY(10px);
+
+  transition: .3s ease;
+  opacity: 0;
+}
+
+.grid-item:hover .img-wrap .title {
+  background: linear-gradient(to right, 
+  rgba(0, 0, 0, 0), 
+  rgba(0, 0, 0, .7) 20%, 
+  rgba(0, 0, 0, .7) 80%, 
+  rgba(0, 0, 0, 0));
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grid-item .img-wrap img {
+  object-fit: cover;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.info-wrap {
+  padding: 8px 2px;
+}
+
+.info-wrap .author-name {
+  font-size: 14px;
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 
