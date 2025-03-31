@@ -1,21 +1,20 @@
 # AnnotateX
 
-Web application for image management and annotation. 
+Web application for image management and annotation.
 
 Allows public sharing.
-
 
 ---
 
 # Front Structure
 
-## Main Page 
+## Main Page
 
 ### Header
 
-- Search
-- Menu
-- User Icon
+- ✔️ Search
+- ✔️ Menu
+- ✔️ User Icon
 
 ### Filtering
 
@@ -24,13 +23,12 @@ Allows public sharing.
 
 ### Image Grid
 
- - Image
- - author
- - category
- - title
+- ✔️ Image
+- ✔️ author
+- category
+- ✔️ title
 
 ### Pagination
-
 
 ### Footer
 
@@ -38,33 +36,33 @@ Allows public sharing.
 
 ## Registration / Login
 
-### Sign up 
+### Sign up
 
-- Email 
+- Email
 - Name
 - pwd
 - confirm pwd
 - user agreement
 
-### Login 
+### Login
+
 - username
 - pwd
 
-- forgot pwd?? 
+- forgot pwd??
 
 ## Profile
 
 ### Sidebar
+
 - personal info
 - logout
-
 
 - upload image
 - dashboard (image grid)
 
 ## Annotation page??
 
-
-## Admin Panel 
+## Admin Panel
 
 - smth close to profile page
