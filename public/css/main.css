@@ -356,19 +356,19 @@ body {
   transition-delay: 0.5s;
 }
 
-.grid-item .img-wrap .categories li:nth-child(1) {
+.grid-item .img-wrap .categories .category-fantasy {
   background: rgba(244, 67, 54, 0.8);
 }
-.grid-item .img-wrap .categories li:nth-child(2) {
+.grid-item .img-wrap .categories .category-adventure {
   background: rgba(0, 128, 0, 0.8); /* Green */
 }
-.grid-item .img-wrap .categories li:nth-child(3) {
+.grid-item .img-wrap .categories .category-design {
   background: rgba(128, 0, 128, 0.8); /* Purple */
 }
-.grid-item .img-wrap .categories li:nth-child(4) {
+.grid-item .img-wrap .categories .category-photo {
   background: rgba(255, 152, 0, 0.8); /* Orange (#ff9800) */
 }
-.grid-item .img-wrap .categories li:nth-child(5) {
+.grid-item .img-wrap .categories .category-inspiration {
   background: rgba(33, 150, 243, 0.8); /* Blue (#2196f3) */
 }
 
