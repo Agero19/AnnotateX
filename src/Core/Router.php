@@ -5,7 +5,7 @@
 namespace Core;
 
 class Router {
-    // Хранит список зарегистрированных маршрутов
+    // Stores the list of registered routes
     protected $routes = [];
     protected $config = [];
 
@@ -22,7 +22,7 @@ class Router {
     }
 
     protected function addRoute($method, $uri, $action) {
-        // Удаляем завершающий слэш для единообразия
+        // Remove trailing slash for consistency
 //        $uri = rtrim($uri, '/');
 //        if ($uri === '') {
 //            $uri = '/';
@@ -51,23 +51,23 @@ class Router {
             }
         }
 
-        // Если маршрут не найден – возвращаем 404
+        // If the route is not found – return 404
         http_response_code(404);
         echo "404 Not Found";
     }
 
     protected function callAction($action) {
-        // Ожидается формат "Controller@method"
+        // Expected format "Controller@method"
         list($controllerName, $method) = explode('@', $action);
         $controllerClass = "Controller\\" . $controllerName;
 
         if (!class_exists($controllerClass)) {
-            throw new \Exception("Контроллер $controllerClass не найден");
+            throw new \Exception("Controller $controllerClass not found");
         }
 
         $controller = new $controllerClass;
         if (!method_exists($controller, $method)) {
-            throw new \Exception("Метод $method не найден в контроллере $controllerClass");
+            throw new \Exception("Method $method not found in controller $controllerClass");
         }
 
         return call_user_func([$controller, $method]);
