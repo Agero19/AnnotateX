@@ -25,7 +25,7 @@ Allows public sharing.
 
 - ✔️ Image
 - ✔️ author
-- category
+- ✔️ category
 - ✔️ title
 
 ### Pagination

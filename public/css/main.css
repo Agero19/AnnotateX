@@ -356,20 +356,20 @@ body {
   transition-delay: 0.5s;
 }
 
-.grid-item .img-wrap .categories .category-fantasy {
-  background: rgba(244, 67, 54, 0.8);
+.grid-item .img-wrap .categories .cat-01 {
+  background: rgba(244, 67, 54, 0.8); /* Fantasy */
 }
-.grid-item .img-wrap .categories .category-adventure {
-  background: rgba(0, 128, 0, 0.8); /* Green */
+.grid-item .img-wrap .categories .cat-02 {
+  background: rgba(0, 128, 0, 0.8); /* Adventure */
 }
-.grid-item .img-wrap .categories .category-design {
-  background: rgba(128, 0, 128, 0.8); /* Purple */
+.grid-item .img-wrap .categories .cat-03 {
+  background: rgba(128, 0, 128, 0.8); /* Design */
 }
-.grid-item .img-wrap .categories .category-photo {
-  background: rgba(255, 152, 0, 0.8); /* Orange (#ff9800) */
+.grid-item .img-wrap .categories .cat-04 {
+  background: rgba(255, 152, 0, 0.8); /* Photo */
 }
-.grid-item .img-wrap .categories .category-inspiration {
-  background: rgba(33, 150, 243, 0.8); /* Blue (#2196f3) */
+.grid-item .img-wrap .categories .cat-05 {
+  background: rgba(33, 150, 243, 0.8); /* Inspiration */
 }
 
 .grid-item .img-wrap img {
