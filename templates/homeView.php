@@ -33,7 +33,7 @@
     <header class="header">
       <div class="container">
 
-        <a href="#"
+        <a href="homeView.php"
           class="logo">
           <img src="img/Logo.svg"
             alt="">
@@ -92,7 +92,7 @@
             </svg>
           </button>
           <div class="dropdown-content">
-            <a href="#">Profile</a>
+            <a href="profileView.php">Profile</a>
             <a href="#">Settings</a>
           </div>
         </div>
