@@ -17,7 +17,7 @@ class ImageController
 
     public function getAllImages(): array
     {
-        $stmt = $this->db->query("SELECT * FROM images");
+        $stmt = $this->db->query("SELECT * FROM images WHERE visibility = 1");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
